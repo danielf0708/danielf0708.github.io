@@ -1,0 +1,67 @@
+
+<!--Dienstag,22.7.25-->
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>apod</title>
+
+  </head>
+  <body> 
+    <!--der Tag h1 stellt eine Überschrift dar-->
+    <h1>diese seite ist anders</h1>
+    <!--der Tag a stellt einen anker/button dar, um an eine andere html-seite zu springen-->
+    <a href="index.html">zurück</a>
+    <!--in den geöffneten script-Tag kann man Javascripttext einfügen/anwenden-->
+    <script>
+        //hier beginnt Javascript
+        var apikey = "DEMO_KEY"
+        var url = `https://api.nasa.gov/planetary/apod?api_key=${apikey}`
+
+    //eine funktion  kann mit ihrem Namen(loadApod) aufgerufen werden
+    //diese funktion (loadApod) enthält Code der uns ein Bild eine Beschreibung und ein Datum von der NASA-Api runtertläd// 
+    async function loadApod() {
+        try {
+            //response ist eine variable der wir mit fetch sagen, dass sie eine url(zeile 18) aufrufen soll
+            var response = await fetch(url)
+            //data ist eine Varible..., die den wert response in json umwandelt und als ergebnis(data) zurückgibt
+            var data = await response.json()
+            //container ..., die dafür sorgt, dass im documentenbody unsere Ergebnisse erscheinen
+            var container = document.body
+
+            //hier erstellen wir mehrere Variablen und geben allen einen tag, eine ID, einen wert(value)
+            var elements = [
+                { tag: "img", id: "apod_bild", value: data.url },
+                { tag: "p", id: "apod_beschreibung", value: data.explanation },
+                { tag: "p", id: "apod_datum", value: data.date }
+            ]
+
+            //hier haben wir eine schleife,die für jedes EINZELNE element(el) die werte der elements hinzufügt
+            for (var el of elements){
+                var element = document.createElement(el.tag)
+                element.id = el.id
+
+                //hier wird geprüft, ob ein element den tag img hat und wenn ja wird dort der pfad eingefügt
+                if (el.tag === "img") {
+                  element.src = el.value
+                  element.alt = "normalerweise sollte hier ein bild sein"  
+                  //alle tags die nicht img heißen kommen einfach die value(beschreibung und datum) hinzugefügt
+                } else {
+                    element.textContent = el.value
+                }
+                //hängen an unsere variable container(zeile29) alle unseren elemente an
+                container.appendChild(element)
+            }
+            //catch fangen Fehler ab, damit kein Programmabsturz
+             } catch (error) {
+            console.error("Fehler beim Abrufen der API:", error);
+        }
+        
+    }
+    //hier wird die Funktion (loadApod) aufgerufen//
+    loadApod()
+    //hier endet Javascript-Siehe Kommentarschreibweise//
+    </script>
+  </body>
+</html>

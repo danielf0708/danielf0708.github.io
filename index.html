@@ -1,0 +1,73 @@
+
+<!--Dienstag,22.7.25-->
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ringelblume</title>
+  </head>
+  <body>
+    <!--unten/folgend beginnt der Frontend (html=auszeichnungssprachencode)-->
+    <h1 id="überschrift">blumen blühen</h1>
+    <button onclick="überschriftÄndern()">farbe ändern</button>
+    <hr>
+    <p id="rndAnzeigen"></p> 
+    <button onclick="rndAnzeigen()"> rnd anzeigen</button>
+    <hr>
+    <a href="apod.html">seite2</a>
+        <a href="wetter.html">wetter</a>
+    <hr>
+    <ul id="anzeige">
+    </ul>
+    <input type="text" id="number">
+  <button onclick="addtodo()">füge aufgabe hinzu</button>
+  <hr>
+<p id="farbe">die sonne scheint</p>
+<button id="wählfarbe" type="submit">absenden</button>
+    <br>
+  <input type="radio" id="html" name="grün" value="123">
+  <label for="html">HTML</label><br>
+  <input type="radio" id="css" name="blau">
+  <label for="css">CSS</label><br>
+  <input type="radio" id="javascript" name="rot">
+  <label for="javascript">JavaScript</label> 
+<!--unten/folgend beginnt der Backend (Javascript=Ausführcode)-->
+<script>
+  var farbwahlbutton = document.getElementById("wählfarbe")
+  farbwahlbutton.addEventListener("click", () =>{
+    radiocontrol()
+  })
+
+  function radiocontrol(){
+    if (document.getElementById("html").checked){
+      console.log("hallo1")
+    }
+    else if (document.getElementById("css").checked){
+      console.log("hallo2")
+    }
+     else if (document.getElementById("javascript").checked){
+      console.log("hallo3")
+    }
+  }
+
+function addtodo(){
+  var x = document.getElementById("anzeige")
+  x.innerHTML += `<li>${number.value}</li>`
+  var zahl = "1 2 8"  
+  console.log("hallo welt" + zahl);
+  
+}
+
+function überschriftÄndern(){
+    var x = document.getElementById("überschrift")
+    x.style.color = "red"    
+}
+function rndAnzeigen(){
+    var randomErstellen = Math.floor(Math.random() * 101)
+    var y = document.getElementById("rndAnzeigen")
+    y.innerHTML = randomErstellen
+}
+    </script>
+  </body>
+</html>

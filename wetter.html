@@ -1,0 +1,95 @@
+<!--Mittwoch,23.7.25-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1> wetterdaten</h1>
+    <h3> in deiner stadt</h3>
+    <div class="container">
+        <div>
+            <input type="text" placeholder="stadt eingeben" id="holeStadtname">
+            <button id="wetterbuton" type="submit">daten senden</button>
+        </div>
+    </div>
+    <div class="container" id="weatherContainer"></div>
+    <script>
+        var wetterbuton = document.getElementById("wetterbuton")
+        var apikey = "e55abf5fbb18d9cdd79bd8c6ae5c3f74"
+        wetterbuton.addEventListener("click", () => (
+         // alert("hallo")  
+          fetchWeather()
+        ))
+
+        function getCity(){
+            var cityNameInput = document.getElementById("holeStadtname").value   
+            if (cityNameInput == "") {
+                alert("gib einen Stadtnamen ein")
+            } else { 
+                return cityNameInput
+            } 
+        }
+
+        async function fetchWeather(){
+            var city = getCity()
+            console.log(city)
+            let antwort = await fetch(
+                `https://api.openweathermap.org/data/2.5/weather?units=metric&q=${city}&appid=${apikey}`    
+            )
+
+           // https://api.openweathermap.org/data/2.5/weather?units=metric&q=Görlitz&appid=e55abf5fbb18d9cdd79bd8c6ae5c3f74
+           //
+
+            if (!antwort.ok) {
+                alert("error: " + antwort.status)
+            } else {
+                let weatherData = await antwort.json()
+                useWeatherData(weatherData)
+            }
+        } 
+
+        function useWeatherData(weatherData){
+            console.log(weatherData)
+            var showDegree = document.createElement("h5")
+            showDegree.textContent = "Temperatur: "
+            document.getElementById("weatherContainer").appendChild(showDegree)
+            var Degree = document.createElement("h5")
+            Degree.textContent = weatherData.main.temp
+            document.getElementById("weatherContainer").appendChild(Degree)
+              
+
+            var showCity = document.createElement("h5")
+            showCity.textContent = "City: "
+            document.getElementById("weatherContainer").appendChild(showCity)
+            var City = document.createElement("h5")
+            City.textContent = weatherData.name
+            document.getElementById("weatherContainer").appendChild(City)
+
+            var showWind = document.createElement("h5")
+            showWind.textContent = "Windspeed: "
+            document.getElementById("weatherContainer").appendChild(showWind)
+            var Wind = document.createElement("h5")
+            Wind.textContent = weatherData.wind.speed + " km/h"
+            document.getElementById("weatherContainer").appendChild(Wind)
+
+             var showHumidity = document.createElement("h5")
+            showHumidity.textContent = "Humidity: "
+            document.getElementById("weatherContainer").appendChild(showHumidity)
+            var Humidity = document.createElement("h5")
+            Humidity.textContent = weatherData.main.humidity + " %"
+            document.getElementById("weatherContainer").appendChild(Humidity)
+
+            var showDesc = document.createElement("h5")
+            showDesc.textContent = "Weatherdescription: "
+            document.getElementById("weatherContainer").appendChild(showDesc)
+            var Desc = document.createElement("h5")
+            Desc.textContent = weatherData.weather[0].description
+            document.getElementById("weatherContainer").appendChild(Desc)
+        }
+    </script>
+    
+</body>
+</html>
