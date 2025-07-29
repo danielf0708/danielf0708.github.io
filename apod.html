@@ -13,16 +13,27 @@
     <h1>diese seite ist anders</h1>
     <!--der Tag a stellt einen anker/button dar, um an eine andere html-seite zu springen-->
     <a href="index.html">zurück</a>
+    <input type="date" id="dateshow">
+    <button  onclick="dateshowplease()">ausführen</button>
     <!--in den geöffneten script-Tag kann man Javascripttext einfügen/anwenden-->
     <script>
         //hier beginnt Javascript
-        var apikey = "DEMO_KEY"
-        var url = `https://api.nasa.gov/planetary/apod?api_key=${apikey}`
 
-    //eine funktion  kann mit ihrem Namen(loadApod) aufgerufen werden
-    //diese funktion (loadApod) enthält Code der uns ein Bild eine Beschreibung und ein Datum von der NASA-Api runtertläd// 
-    async function loadApod() {
+        const originalDatum = new Date()
+        const heute = originalDatum.toISOString().slice(0, 10) 				// aktuelles Datum und aktuelle Lokalzeit
+        function dateshowplease() {
+            var date = document.getElementById("dateshow").value
+            return date
+            console.log(heute)
+        }
+
+        async function loadApod() {
         try {
+            var url = `https://api.nasa.gov/planetary/apod?` + 
+            `api_key=` + 
+            `DEMO_KEY` + 
+            `&date=` + 
+            dateshowplease() 
             //response ist eine variable der wir mit fetch sagen, dass sie eine url(zeile 18) aufrufen soll
             var response = await fetch(url)
             //data ist eine Varible..., die den wert response in json umwandelt und als ergebnis(data) zurückgibt
