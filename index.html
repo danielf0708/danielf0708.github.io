@@ -1,89 +1,100 @@
-
 <!--Dienstag,22.7.25-->
 <!DOCTYPE html>
 <html lang="de">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ringelblume</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
     <!--unten/folgend beginnt der Frontend (html=auszeichnungssprachencode)-->
     <nav class="navbar bg-body-tertiary">
       <div class="container-fluid">
-        <a href="wetter.html"><button class="btn btn-dark">
-          Wetterseite 
-        </button></a>
-        <a href="apod.html"><button class="btn btn-dark">
-          apod
-        </button></a>
-        <a href="lernseite.html"><button class="btn btn-dark">
-          einfach lernen 
-        </button></a>
+        <a href="wetter.html"
+          ><button class="btn btn-dark">Wetterseite</button></a
+        >
+        <a href="apod.html"><button class="btn btn-dark">apod</button></a>
+        <a href="lernseite.html"
+          ><button class="btn btn-dark">einfach lernen</button></a
+        >
       </div>
     </nav>
     <div>
       <h1 id="überschrift">Dies ist MEINE Seite</h1>
-      
-      <button onclick="überschriftÄndern()" class="btn btn-danger">farbe ändern</button>
-      <hr>
-      <p id="rndAnzeigen"></p> 
-      <button onclick="rndAnzeigen()"> rnd anzeigen</button>
-      <hr>
-      <ul id="anzeige">
-      </ul>
-      <input type="text" id="number">
+
+      <button onclick="überschriftÄndern()" class="btn btn-danger">
+        farbe ändern
+      </button>
+      <hr />
+      <p id="rndAnzeigen"></p>
+      <button onclick="rndAnzeigen()">rnd anzeigen</button>
+      <hr />
+      <ul id="anzeige"></ul>
+      <input type="text" id="todo" />
       <button onclick="addtodo()">füge aufgabe hinzu</button>
-      <hr>
-      <p id="farbe">die sonne scheint</p>
-      <button id="wählfarbe" type="submit">absenden</button>
-      <br>
-      <input type="radio" id="html" name="grün" value="123">
-      <label for="html">HTML</label><br>
-      <input type="radio" id="css" name="blau">
-      <label for="css">CSS</label><br>
-      <input type="radio" id="javascript" name="rot">
-      <label for="javascript">JavaScript</label> 
+      <hr />
+      <p id="zweiteÜberschrift">Wähle unten eine Option und drücke senden</p>
+      <input type="radio" id="grün" name="grün" />
+      <label for="grün">grün</label><br />
+      <input type="radio" id="blau" name="blau" />
+      <label for="blau">blau</label><br />
+      <input type="radio" id="rot" name="rot" />
+      <label for="rot">rot</label>
+      <br />
+      <button type="submit" onclick="radiocontrol()">senden</button>
     </div>
-<!--unten/folgend beginnt der Backend (Javascript=Ausführcode)-->
-<script>
-  var farbwahlbutton = document.getElementById("wählfarbe")
-  farbwahlbutton.addEventListener("click", () =>{
-    radiocontrol()
-  })
+    <!--unten/folgend beginnt der Backend (Javascript=Ausführcode)-->
+    <script>
+      //diese Fkt reagiert auf einen Buttonclick und weisst dann die Farbe des ausgewählten Radiobutton hinzu
+      function radiocontrol() {
+        if (
+          //das voranstehende Ausrufezeichen verneint (nicht.checked)
+          !document.getElementById("grün").checked &&
+          !document.getElementById("blau").checked &&
+          !document.getElementById("rot").checked
+        ) {
+          alert("Wähle eine Farbe");
+        } else {
+          if (document.getElementById("grün").checked) {
+            return (document.getElementById("zweiteÜberschrift").style.color =
+              "green");
+          } else if (document.getElementById("blau").checked) {
+            return (document.getElementById("zweiteÜberschrift").style.color =
+              "blue");
+          } else if (document.getElementById("rot").checked) {
+            return (document.getElementById("zweiteÜberschrift").style.color =
+              "red");
+          }
+        }
+      }
 
-  function radiocontrol(){
-    if (document.getElementById("html").checked){
-      console.log("hallo1")
-    }
-    else if (document.getElementById("css").checked){
-      console.log("hallo2")
-    }
-     else if (document.getElementById("javascript").checked){
-      console.log("hallo3")
-    }
-  }
+      function addtodo() {
+        var x = document.getElementById("anzeige");
+        x.innerHTML += `<li>${todo.value}</li>`;
+      }
 
-function addtodo(){
-  var x = document.getElementById("anzeige")
-  x.innerHTML += `<li>${number.value}</li>`
-  var zahl = "1 2 8"  
-  console.log("hallo welt" + zahl);
-  
-}
-
-function überschriftÄndern(){
-    var x = document.getElementById("überschrift")
-    x.style.color = "red"    
-}
-function rndAnzeigen(){
-    var randomErstellen = Math.floor(Math.random() * 101)
-    var y = document.getElementById("rndAnzeigen")
-    y.innerHTML = randomErstellen
-}
-</script>
+      function überschriftÄndern() {
+        var farben = ["red", "green", "purple", "blue", "yellow", "black"];
+        var x = document.getElementById("überschrift");
+        x.style.color = farben[Math.floor(Math.random() * farben.length)];
+      }
+      function rndAnzeigen() {
+        var randomErstellen = Math.floor(Math.random() * 101);
+        var y = document.getElementById("rndAnzeigen");
+        y.innerHTML = randomErstellen;
+      }
+    </script>
   </body>
 </html>

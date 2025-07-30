@@ -1,92 +1,97 @@
-
 <!--Dienstag,22.7.25-->
 <!DOCTYPE html>
 <html lang="de">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>apod</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
-     <nav class="navbar bg-body-tertiary">
-        <div class="container-fluid">
-          <a href="index.html"><button class="btn btn-dark">
-            Startseite 
-          </button></a>
-          <a href="wetter.html"><button class="btn btn-dark">
-            Wetterseite 
-          </button></a>
-          <a href="lernseite.html"><button class="btn btn-dark">
-            Lernseite
-          </button></a>
-        </div>
-      </nav> 
+    <nav class="navbar bg-body-tertiary">
+      <div class="container-fluid">
+        <a href="index.html"
+          ><button class="btn btn-dark">Startseite</button></a
+        >
+        <a href="wetter.html"
+          ><button class="btn btn-dark">Wetterseite</button></a
+        >
+        <a href="lernseite.html"
+          ><button class="btn btn-dark">Lernseite</button></a
+        >
+      </div>
+    </nav>
     <!--der Tag h1 stellt eine Überschrift dar-->
     <h1>diese seite ist anders</h1>
     <!--der Tag a stellt einen anker/button dar, um an eine andere html-seite zu springen-->
     <a href="index.html">zurück</a>
-    <input type="date" id="dateshow">
-    <button  onclick="dateshowplease()">ausführen</button>
+    <input type="date" id="dateshow" />
+    <button onclick="loadApod()">ausführen</button>
     <!--in den geöffneten script-Tag kann man Javascripttext einfügen/anwenden-->
     <script>
-        //hier beginnt Javascript
+      //hier beginnt Javascript
 
-        const originalDatum = new Date()
-        const heute = originalDatum.toISOString().slice(0, 10) 				// aktuelles Datum und aktuelle Lokalzeit
-        function dateshowplease() {
-            var date = document.getElementById("dateshow").value
-            return date
-            console.log(heute)
+      // aktuelles Datum und aktuelle Lokalzeit
+      const originalDatum = new Date(); //
+      //Datum zurecht schneiden (slice = schneiden)
+      const heute = originalDatum.toISOString().slice(0, 10);
+
+      //diese Fkt. prüft ob das Datum nicht in der Zukunft liegt und gibt es weiter
+      function dateshowplease() {
+        var date = document.getElementById("dateshow").value;
+        if (date > heute) {
+          alert("Datum in der Zukunft!");
+        } else {
+          return date;
         }
+      }
 
-        async function loadApod() {
-        try {
-            var url = `https://api.nasa.gov/planetary/apod?` + 
-            `api_key=` + 
-            `DEMO_KEY` + 
-            `&date=` + 
-            dateshowplease() 
-            //response ist eine variable der wir mit fetch sagen, dass sie eine url(zeile 18) aufrufen soll
-            var response = await fetch(url)
-            //data ist eine Varible..., die den wert response in json umwandelt und als ergebnis(data) zurückgibt
-            var data = await response.json()
-            //container ..., die dafür sorgt, dass im documentenbody unsere Ergebnisse erscheinen
-            var container = document.body
+      //hier erschaffen wir unsere URL schreiben dies in eine Variable...
+      //...wandeln es in Json und übergeben es der useData()
+      async function loadApod() {
+        var url = await fetch(
+          `https://api.nasa.gov/planetary/apod?` +
+            `api_key=` +
+            `DEMO_KEY` +
+            `&date=` +
+            dateshowplease()
+        );
+        var data = await url.json();
+        useData(data);
+      }
 
-            //hier erstellen wir mehrere Variablen und geben allen einen tag, eine ID, einen wert(value)
-            var elements = [
-                { tag: "img", id: "apod_bild", value: data.url },
-                { tag: "p", id: "apod_beschreibung", value: data.explanation },
-                { tag: "p", id: "apod_datum", value: data.date }
-            ]
+      //hier erschaffen wir die nötigen HTML-Elemente und weisen ihn die werte (data) zu ...
+      //...und hängen dann alle Elemente an unser HTML-Dokument an
+      function useData(data) {
+        var container = document.body;
+        var elements = [
+          { tag: "img", id: "apod_bild", value: data.url },
+          { tag: "p", id: "apod_beschreibung", value: data.explanation },
+          { tag: "p", id: "apod_datum", value: data.date },
+        ];
+        for (var el of elements) {
+          var element = document.createElement(el.tag);
+          element.id = el.id;
 
-            //hier haben wir eine schleife,die für jedes EINZELNE element(el) die werte der elements hinzufügt
-            for (var el of elements){
-                var element = document.createElement(el.tag)
-                element.id = el.id
-
-                //hier wird geprüft, ob ein element den tag img hat und wenn ja wird dort der pfad eingefügt
-                if (el.tag === "img") {
-                  element.src = el.value
-                  element.alt = "normalerweise sollte hier ein bild sein"  
-                  //alle tags die nicht img heißen kommen einfach die value(beschreibung und datum) hinzugefügt
-                } else {
-                    element.textContent = el.value
-                }
-                //hängen an unsere variable container(zeile29) alle unseren elemente an
-                container.appendChild(element)
-            }
-            //catch fangen Fehler ab, damit kein Programmabsturz
-             } catch (error) {
-            console.error("Fehler beim Abrufen der API:", error);
+          if (el.tag === "img") {
+            element.src = el.value;
+            element.alt = "normalerweise sollte hier ein bild sein";
+          } else {
+            element.textContent = el.value;
+          }
+          container.appendChild(element);
         }
-        
-    }
-    //hier wird die Funktion (loadApod) aufgerufen//
-    loadApod()
-    //hier endet Javascript-Siehe Kommentarschreibweise//
+      }
     </script>
   </body>
 </html>

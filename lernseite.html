@@ -1,108 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
-</head>
-<body>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
     <nav class="navbar bg-body-tertiary">
       <div class="container-fluid">
-        <a href="index.html"><button class="btn btn-dark">
-          Startseite 
-        </button></a>
-        <a href="wetter.html"><button class="btn btn-dark">
-          Wetterseite 
-        </button></a>
-        <a href="apod.html"><button class="btn btn-dark">
-          apod
-        </button></a>
+        <a href="index.html"
+          ><button class="btn btn-dark">Startseite</button></a
+        >
+        <a href="wetter.html"
+          ><button class="btn btn-dark">Wetterseite</button></a
+        >
+        <a href="apod.html"><button class="btn btn-dark">apod</button></a>
         <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="searchField"/>
+          <input
+            class="form-control me-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+            id="searchField"
+          />
           <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
       </div>
     </nav>
     <button onclick="jsausführen()">Style per Javascript</button>
-    <hr>
+    <hr />
     <ol>
-        <li>
-            <h4 class="überschrift">CSS</h4>
-            <p class="text">css styling</p>
-        </li>
-        <li>
-            <h4 class="überschrift">CSS</h4>
-            <p class="text">css styling1</p>
-        </li>
-        <li>
-            <h4 class="überschrift">CSS</h4>
-            <p class="text">css styling2</p>
-        </li>
-        <li>
-            <h4 class="überschriftjs js">js</h4>
-            <p class="unterschriftjs js">js styling</p>
-        </li>
-        <li>
-            <h4 class="überschriftjs js">js</h4>
-            <p class="unterschriftjs js">js styling1</p>
-        </li>
-        <li>
-            <h4 class="überschriftjs js">js</h4>
-            <p class="unterschriftjs js">js styling2</p>
-        </li>
-        <li>
-            <h4>bootstrap</h4>
-            <p>bs styling</p>
-        </li>
-        <li>
-            <h4>bootstrap</h4>
-            <p>bs styling1</p>
-        </li>
-        <li>
-            <h4>bootstrap</h4>
-            <p>bs styling2</p>
-        </li>
+      <li>
+        <h4 class="überschrift">CSS</h4>
+        <p class="text">css styling</p>
+      </li>
+      <li>
+        <h4 class="überschrift">CSS</h4>
+        <p class="text">css styling1</p>
+      </li>
+      <li>
+        <h4 class="überschrift">CSS</h4>
+        <p class="text">css styling2</p>
+      </li>
+      <li>
+        <h4 class="überschriftjs js">js</h4>
+        <p class="unterschriftjs js">js styling</p>
+      </li>
+      <li>
+        <h4 class="überschriftjs js">js</h4>
+        <p class="unterschriftjs js">js styling1</p>
+      </li>
+      <li>
+        <h4 class="überschriftjs js">js</h4>
+        <p class="unterschriftjs js">js styling2</p>
+      </li>
+      <li>
+        <h4 class="text-primary">bootstrap</h4>
+        <p class="bg-success">bs styling</p>
+      </li>
+      <li>
+        <h4 class="text-warning">bootstrap</h4>
+        <p>bs styling1</p>
+      </li>
+      <li>
+        <h4 class="text-success">bootstrap</h4>
+        <p>bs styling2</p>
+      </li>
     </ol>
-        <script>
-            function jsausführen(){
-                var elements = document.getElementsByClassName("js")
-                console.log("elments" + elements)
-                for (let el of elements){
-                    console.log("el" + el)
-                    el.style.color ="red"
-                }
-            }
-           
-            //suchfunktion
-            const searchableItems = document.querySelectorAll("li")
+    <script>
+      function jsausführen() {
+        var elements = document.getElementsByClassName("js");
+        console.log("elments" + elements);
+        for (let el of elements) {
+          console.log("el" + el);
+          el.style.color = "red";
+        }
+      }
 
-            searchableItems.forEach((li) => {
-                const searchField = document.getElementById("searchField")
-                const events = [ "keyup", "input", "paste", "cut"]
-                const listitems = document.querySelectorAll("li")
-                events.forEach((event) => {
-                searchField.addEventListener(event, ($event) => {
-                    const {value} = $event.target
-                    //console.log(value)
-                    search(value, listitems)
-                })
-                })
-            })
+      //suchfunktion
+      const searchableItems = document.querySelectorAll("li");
 
-            function search(value, itemList){
-                //console.log(itemList)
-                itemList.forEach((item)=> {
-                const text = item.textContent.toLowerCase()
-                const match = text.includes(value.toLowerCase())
-                item.style.display = match ? 'block' : 'none'
-                console.log(match)
-                })
-            }
-            //ende suchfunktion
-        </script>
-    
-</body>
+      searchableItems.forEach((li) => {
+        const searchField = document.getElementById("searchField");
+        const events = ["keyup", "input", "paste", "cut"];
+        const listitems = document.querySelectorAll("li");
+        events.forEach((event) => {
+          searchField.addEventListener(event, ($event) => {
+            const { value } = $event.target;
+            //console.log(value)
+            search(value, listitems);
+          });
+        });
+      });
+
+      function search(value, itemList) {
+        //console.log(itemList)
+        itemList.forEach((item) => {
+          const text = item.textContent.toLowerCase();
+          const match = text.includes(value.toLowerCase());
+          item.style.display = match ? "block" : "none";
+          console.log(match);
+        });
+      }
+      //ende suchfunktion
+    </script>
+  </body>
 </html>
